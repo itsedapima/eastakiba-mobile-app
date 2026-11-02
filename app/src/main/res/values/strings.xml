@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EASTAKIBA</string>
+    <string name="app_tagline">Together We Succeed</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone Number</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="transactions">Transactions</string>
+    <string name="statement">Statement</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="savings_balance">Savings Balance</string>
+    <string name="loan_balance">Loan Balance</string>
+    <string name="net_balance">Net Balance</string>
+    <string name="download_statement">Download Statement</string>
+    <string name="no_transactions">No transactions found</string>
+</resources>

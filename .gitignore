@@ -1,0 +1,30 @@
+# Android
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/app/build/
+/captures
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Gradle
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Keystore
+*.jks
+*.keystore
+
+# Misc
+*.log
+*.zip
+.env
+.vscode/
+Thumbs.db
