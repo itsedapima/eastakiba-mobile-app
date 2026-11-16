@@ -62,25 +62,56 @@ class SelfRegStep3Fragment : Fragment(), SelfRegisterActivity.StepValidator {
         restoreImages()
     }
 
+    private fun getDocUri(docType: String): Uri? = when (docType) {
+        "passport_photo" -> vm.passportPhotoUri
+        "id_front" -> vm.idFrontUri
+        "id_back" -> vm.idBackUri
+        else -> null
+    }
+
     private fun showImagePicker(docType: String) {
         currentDocType = docType
+        val title = when(docType) {
+            "passport_photo" -> "Passport Photo"
+            "id_front" -> "ID Front"
+            else -> "ID Back"
+        }
+        val hasImage = getDocUri(docType) != null
+        val options = mutableListOf("Take Photo", "Choose from Gallery")
+        if (hasImage) options.add("View Photo")
+
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Upload ${ when(docType) {
-                "passport_photo" -> "Passport Photo"
-                "id_front" -> "ID Front"
-                else -> "ID Back"
-            }}")
-            .setItems(arrayOf("Take Photo", "Choose from Gallery")) { _, which ->
-                if (which == 0) {
-                    if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        launchCamera()
-                    } else {
-                        cameraPermission.launch(Manifest.permission.CAMERA)
+            .setTitle(title)
+            .setItems(options.toTypedArray()) { _, which ->
+                when (which) {
+                    0 -> {
+                        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                            launchCamera()
+                        } else {
+                            cameraPermission.launch(Manifest.permission.CAMERA)
+                        }
                     }
-                } else {
-                    galleryLauncher.launch("image/*")
+                    1 -> galleryLauncher.launch("image/*")
+                    2 -> showFullImage(docType, title)
                 }
             }
+            .show()
+    }
+
+    private fun showFullImage(docType: String, title: String) {
+        val uri = getDocUri(docType) ?: return
+        val imageView = android.widget.ImageView(requireContext()).apply {
+            adjustViewBounds = true
+            scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
+            val pad = (16 * resources.displayMetrics.density).toInt()
+            setPadding(pad, pad, pad, pad)
+        }
+        Glide.with(this).load(uri).into(imageView)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(title)
+            .setView(imageView)
+            .setPositiveButton("OK", null)
+            .setNegativeButton("Retake") { _, _ -> showImagePicker(docType) }
             .show()
     }
 

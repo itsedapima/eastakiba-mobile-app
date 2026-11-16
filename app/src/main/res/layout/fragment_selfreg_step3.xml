@@ -50,7 +50,7 @@
                 <ImageView android:id="@+id/ivIdFront"
                     android:layout_width="match_parent" android:layout_height="80dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_id_card"
+                    android:src="@drawable/ic_id_front"
                     app:tint="@color/text_hint"/>
                 <TextView android:id="@+id/tvIdFrontLabel"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 <ImageView android:id="@+id/ivIdBack"
                     android:layout_width="match_parent" android:layout_height="80dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_id_card"
+                    android:src="@drawable/ic_id_back"
                     app:tint="@color/text_hint"/>
                 <TextView android:id="@+id/tvIdBackLabel"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
