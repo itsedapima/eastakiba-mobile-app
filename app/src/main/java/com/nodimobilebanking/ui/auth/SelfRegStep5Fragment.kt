@@ -191,7 +191,12 @@ class SelfRegStep5Fragment : Fragment() {
 
     private fun uriToFile(uri: Uri, name: String): File? {
         return try {
-            val ext = ".jpg"
+            val mime = requireContext().contentResolver.getType(uri)
+            val ext = when {
+                mime?.contains("png") == true -> ".png"
+                mime?.contains("webp") == true -> ".webp"
+                else -> ".jpg"
+            }
             val file = File(requireContext().cacheDir, "selfreg_${name}_${System.currentTimeMillis()}$ext")
             requireContext().contentResolver.openInputStream(uri)?.use { input ->
                 FileOutputStream(file).use { output -> input.copyTo(output) }

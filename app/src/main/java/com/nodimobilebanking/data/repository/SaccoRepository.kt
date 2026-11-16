@@ -285,7 +285,13 @@ class SaccoRepository(
     ): Resource<String> = safeCall {
         val tokenPart = token.toRequestBody("text/plain".toMediaTypeOrNull())
         val typePart = docType.toRequestBody("text/plain".toMediaTypeOrNull())
-        val reqFile = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
+        val mimeType = when (imageFile.extension.lowercase()) {
+            "jpg", "jpeg" -> "image/jpeg"
+            "png" -> "image/png"
+            "webp" -> "image/webp"
+            else -> "image/jpeg"
+        }
+        val reqFile = imageFile.asRequestBody(mimeType.toMediaTypeOrNull())
         val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, reqFile)
         val r = api.selfRegUploadDocument(tokenPart, typePart, imagePart)
         if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!.message)

@@ -34,7 +34,8 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/actvKinRelationship"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:inputType="none" android:textColor="@color/input_text"/>
+                android:inputType="none" android:textColor="@color/input_text"
+                android:paddingStart="12dp" android:paddingEnd="36dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
