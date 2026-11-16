@@ -201,8 +201,8 @@ class SelfRegStep5Fragment : Fragment() {
             requireContext().contentResolver.openInputStream(uri)?.use { input ->
                 FileOutputStream(file).use { output -> input.copyTo(output) }
             }
-            if (file.length() > 5 * 1024 * 1024) {
-                requireContext().toast("Image too large (max 5MB)")
+            if (file.length() > 15 * 1024 * 1024) {
+                requireContext().toast("Image too large (max 15MB)")
                 null
             } else file
         } catch (e: Exception) {
