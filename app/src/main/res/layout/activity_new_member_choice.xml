@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/background" android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="72dp" android:layout_height="72dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/nodi_logo" android:contentDescription="Company logo"/>
+
+        <TextView android:id="@+id/tvCompanyName"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/primary" android:textSize="22sp"
+            android:textStyle="bold" android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Get started with your SACCO"
+            android:textColor="@color/text_secondary" android:textSize="14sp"/>
+
+        <!-- Self Register Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSelfRegister"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1.5dp"
+            android:clickable="true" android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:padding="20dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout android:layout_width="48dp" android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circle_primary"
+                    android:gravity="center">
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_person_add" android:contentDescription="Register"
+                        app:tint="@color/white"/>
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Self Register"
+                        android:textColor="@color/text_primary" android:textSize="16sp"
+                        android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="New to the SACCO? Sign up and join us today"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                </LinearLayout>
+
+                <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    app:tint="@color/primary" android:contentDescription="Go"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Activate Account Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardActivateAccount"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/divider"
+            app:strokeWidth="1dp"
+            android:clickable="true" android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:padding="20dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout android:layout_width="48dp" android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circle_accent"
+                    android:gravity="center">
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                        android:src="@drawable/ic_verified_user" android:contentDescription="Activate"
+                        app:tint="@color/white"/>
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Activate Account"
+                        android:textColor="@color/text_primary" android:textSize="16sp"
+                        android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Already registered? Activate your mobile account"
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
+                </LinearLayout>
+
+                <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    app:tint="@color/text_tertiary" android:contentDescription="Go"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <TextView android:id="@+id/tvBackToLogin"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="32dp" android:layout_marginBottom="16dp"
+            android:padding="8dp"
+            android:text="Already have an account? Sign in"
+            android:textColor="@color/primary" android:textSize="14sp"
+            android:clickable="true" android:focusable="true"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,6 +1,8 @@
 package com.nodimobilebanking.data.api
 
 import com.nodimobilebanking.data.models.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -111,6 +113,27 @@ interface SaccoApiService {
     // M-Pesa STK Push (payment prompt)
     @POST("actions/stk-push/")
     suspend fun stkPush(@Body body: Map<String, String>): Response<Map<String, String>>
+
+    // ── Self-Registration (AllowAny — no auth required) ────────────────────────
+    @GET("auth/self-register/member-categories/")
+    suspend fun getMemberCategories(): Response<List<MemberCategory>>
+
+    @POST("auth/self-register/validate/")
+    suspend fun selfRegValidate(@Body body: Map<String, String>): Response<SelfRegValidateResponse>
+
+    @Multipart
+    @POST("auth/self-register/upload-document/")
+    suspend fun selfRegUploadDocument(
+        @Part("registration_token") token: RequestBody,
+        @Part("doc_type") docType: RequestBody,
+        @Part image: MultipartBody.Part
+    ): Response<MessageResponse>
+
+    @POST("auth/self-register/initiate-payment/")
+    suspend fun selfRegInitiatePayment(@Body body: Map<String, String>): Response<SelfRegPaymentResponse>
+
+    @POST("auth/self-register/verify-payment/")
+    suspend fun selfRegVerifyPayment(@Body body: Map<String, String>): Response<SelfRegCompleteResponse>
 
     // ── Statements ────────────────────────────────────────────────────────────
     @GET("statements/full/")

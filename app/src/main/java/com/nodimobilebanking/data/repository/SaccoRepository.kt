@@ -4,7 +4,12 @@ import com.nodimobilebanking.data.api.SaccoApiService
 import com.nodimobilebanking.data.models.*
 import com.nodimobilebanking.utils.Resource
 import com.nodimobilebanking.utils.TokenManager
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import java.io.File
 
 class SaccoRepository(
     private val api: SaccoApiService,
@@ -259,6 +264,48 @@ class SaccoRepository(
         ))
         if (r.isSuccessful && r.body() != null) {
             Resource.Success(r.body()!!["message"] ?: "Payment prompt sent")
+        } else Resource.Error(parseError(r.errorBody()?.string()))
+    }
+
+    // ── Self-Registration ─────────────────────────────────────────────────────
+    suspend fun getMemberCategories(): Resource<List<MemberCategory>> = safeCall {
+        val r = api.getMemberCategories()
+        if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!)
+        else Resource.Error(parseError(r.errorBody()?.string()))
+    }
+
+    suspend fun selfRegValidate(data: Map<String, String>): Resource<SelfRegValidateResponse> = safeCall {
+        val r = api.selfRegValidate(data)
+        if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!)
+        else Resource.Error(parseError(r.errorBody()?.string()))
+    }
+
+    suspend fun selfRegUploadDocument(
+        token: String, docType: String, imageFile: File
+    ): Resource<String> = safeCall {
+        val tokenPart = token.toRequestBody("text/plain".toMediaTypeOrNull())
+        val typePart = docType.toRequestBody("text/plain".toMediaTypeOrNull())
+        val reqFile = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
+        val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, reqFile)
+        val r = api.selfRegUploadDocument(tokenPart, typePart, imagePart)
+        if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!.message)
+        else Resource.Error(parseError(r.errorBody()?.string()))
+    }
+
+    suspend fun selfRegInitiatePayment(token: String): Resource<SelfRegPaymentResponse> = safeCall {
+        val r = api.selfRegInitiatePayment(mapOf("registration_token" to token))
+        if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!)
+        else Resource.Error(parseError(r.errorBody()?.string()))
+    }
+
+    suspend fun selfRegVerifyPayment(token: String): Resource<SelfRegCompleteResponse> = safeCall {
+        val r = api.selfRegVerifyPayment(mapOf("registration_token" to token))
+        if (r.isSuccessful && r.body() != null) {
+            val b = r.body()!!
+            tokenManager.saveTokens(b.access, b.refresh)
+            tokenManager.saveUsername(b.username)
+            tokenManager.saveMemberNo(b.memberNo)
+            Resource.Success(b)
         } else Resource.Error(parseError(r.errorBody()?.string()))
     }
 

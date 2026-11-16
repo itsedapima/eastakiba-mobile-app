@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="20dp">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Personal Details"
+            android:textColor="@color/text_primary" android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:layout_marginBottom="16dp"
+            android:text="Tell us about yourself"
+            android:textColor="@color/text_secondary" android:textSize="13sp"/>
+
+        <!-- Member Category -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMemberType"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="Member Category *" style="@style/SaccoTextInput"
+            app:endIconMode="dropdown_menu">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actvMemberType"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="none" android:textColor="@color/input_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Fee display -->
+        <TextView android:id="@+id/tvFeeInfo"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:layout_marginBottom="8dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_fee_info"
+            android:textColor="@color/primary" android:textSize="13sp"
+            android:visibility="gone"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:hint="First Name *" style="@style/SaccoTextInput">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="textPersonName" android:textColor="@color/input_text"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:hint="Middle Name" style="@style/SaccoTextInput">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMiddleName"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="textPersonName" android:textColor="@color/input_text"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:hint="Last Name *" style="@style/SaccoTextInput">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="textPersonName" android:textColor="@color/input_text"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Gender -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Gender *"
+            android:textColor="@color/text_secondary" android:textSize="13sp"/>
+        <RadioGroup android:id="@+id/rgGender"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginTop="4dp">
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbMale" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Male"
+                android:layout_marginEnd="24dp"/>
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbFemale" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Female"/>
+        </RadioGroup>
+
+        <!-- Date of Birth -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:hint="Date of Birth *" style="@style/SaccoTextInput"
+            app:endIconMode="custom" app:endIconDrawable="@drawable/ic_calendar">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDob"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="none" android:focusable="false"
+                android:textColor="@color/input_text" android:clickable="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Marital Status -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMaritalStatus"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:hint="Marital Status" style="@style/SaccoTextInput"
+            app:endIconMode="dropdown_menu">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actvMaritalStatus"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="none" android:textColor="@color/input_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+</ScrollView>

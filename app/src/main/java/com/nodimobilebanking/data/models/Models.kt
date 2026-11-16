@@ -370,6 +370,34 @@ data class DividendSlipRow(
     @SerializedName("net_payout")            val netPayout: Double
 )
 
+// ─── Self-Registration ──────────────────────────────────────────────────────
+data class MemberCategory(
+    val category: String,
+    @SerializedName("display_name") val displayName: String,
+    val amount: Double
+)
+
+data class SelfRegValidateResponse(
+    @SerializedName("registration_token") val registrationToken: String,
+    @SerializedName("fee_amount") val feeAmount: Double,
+    val message: String
+)
+
+data class SelfRegPaymentResponse(
+    val message: String,
+    @SerializedName("checkout_request_id") val checkoutRequestId: String?,
+    @SerializedName("skip_payment") val skipPayment: Boolean = false
+)
+
+data class SelfRegCompleteResponse(
+    val message: String,
+    @SerializedName("member_no") val memberNo: String,
+    val access: String,
+    val refresh: String,
+    val username: String,
+    val email: String
+)
+
 // ─── OTP-only auth responses ─────────────────────────────────────────────────
 data class OtpSentResponse(
     val message: String,

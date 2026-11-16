@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <!-- Android 11+ package visibility: needed so we can launch a PDF viewer
          via Intent.ACTION_VIEW for downloaded dividend slips. -->
@@ -44,6 +47,15 @@
 
         <activity
             android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Self-Registration -->
+        <activity
+            android:name=".ui.auth.NewMemberChoiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.SelfRegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 

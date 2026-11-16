@@ -48,6 +48,37 @@ object RetrofitClient {
         return instance!!
     }
 
+    @Volatile private var publicInstance: SaccoApiService? = null
+
+    fun getPublicInstance(context: Context): SaccoApiService {
+        if (publicInstance == null) {
+            synchronized(this) {
+                if (publicInstance == null) {
+                    val logging = HttpLoggingInterceptor().apply {
+                        level = if (BuildConfig.DEBUG)
+                            HttpLoggingInterceptor.Level.HEADERS
+                        else
+                            HttpLoggingInterceptor.Level.NONE
+                    }
+                    val client = OkHttpClient.Builder()
+                        .addInterceptor(logging)
+                        .connectTimeout(30, TimeUnit.SECONDS)
+                        .readTimeout(60, TimeUnit.SECONDS)
+                        .writeTimeout(60, TimeUnit.SECONDS)
+                        .build()
+
+                    publicInstance = Retrofit.Builder()
+                        .baseUrl(BuildConfig.BASE_URL)
+                        .client(client)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(SaccoApiService::class.java)
+                }
+            }
+        }
+        return publicInstance!!
+    }
+
     /** Call when user logs out to force new client on next login */
     fun reset() {
         instance = null

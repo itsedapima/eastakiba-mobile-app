@@ -108,7 +108,7 @@
         <TextView android:id="@+id/tvRegister"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="New member? Activate your account"
+            android:text="New member? Get started"
             android:textColor="@color/primary" android:textSize="14sp"
             android:clickable="true" android:focusable="true"/>
 

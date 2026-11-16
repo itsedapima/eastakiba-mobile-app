@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvRegister.setOnClickListener {
-            startActivity(Intent(this, OnboardStep1Activity::class.java))
+            startActivity(Intent(this, NewMemberChoiceActivity::class.java))
         }
     }
 
