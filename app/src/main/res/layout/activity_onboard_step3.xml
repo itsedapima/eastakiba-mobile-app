@@ -10,7 +10,7 @@
         <!-- Company brand header -->
         <TextView android:id="@+id/tvCompanyHeader"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="SACCO MIS"
+            android:text="NODi CBS"
             android:textColor="@color/primary" android:textSize="14sp"
             android:textStyle="bold" android:letterSpacing="0.05"
             android:gravity="center" android:maxLines="1" android:ellipsize="end" />

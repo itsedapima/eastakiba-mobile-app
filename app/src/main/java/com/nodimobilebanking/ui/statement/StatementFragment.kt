@@ -579,7 +579,7 @@ class StatementFragment : Fragment() {
                 }
 
                 val companyName    = apiCompanyInfo?.companyName?.takeIf { it.isNotBlank() }
-                    ?: try { tm.getCompanyName() } catch (_: Exception) { "SACCO MIS" }
+                    ?: try { tm.getCompanyName() } catch (_: Exception) { "NODi CBS" }
                 val companyAddress = apiCompanyInfo?.companyAddress?.takeIf { it.isNotBlank() }
                     ?: try { tm.getCompanyAddress() } catch (_: Exception) { "" }
                 val companyContact = apiCompanyInfo?.companyContact?.takeIf { it.isNotBlank() }

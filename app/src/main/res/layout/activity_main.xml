@@ -23,7 +23,7 @@
             android:id="@+id/tvCompanyHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SACCO MIS"
+            android:text="NODi CBS"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"

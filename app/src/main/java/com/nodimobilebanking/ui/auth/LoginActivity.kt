@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val name = tokenManager.getCompanyName()
-            binding.tvCompanyName.text = if (name.isNotBlank() && name != "SACCO MIS") name else getString(R.string.app_name)
+            binding.tvCompanyName.text = if (name.isNotBlank()) name else getString(R.string.app_name)
 
             // If we remember the member number, prefill it and make it read-only.
             // The returning user only needs to enter their PIN.

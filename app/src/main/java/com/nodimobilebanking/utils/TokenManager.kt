@@ -104,13 +104,13 @@ class TokenManager(private val context: Context) {
     }
 
     suspend fun getCompanyName(): String =
-        context.dataStore.data.first()[COMPANY_NAME] ?: "SACCO MIS"
+        context.dataStore.data.first()[COMPANY_NAME] ?: "NODi CBS"
 
     suspend fun getCompanyLogoUrl(): String =
         context.dataStore.data.first()[COMPANY_LOGO_URL] ?: ""
 
     suspend fun getCompanyFooter(): String =
-        context.dataStore.data.first()[COMPANY_FOOTER] ?: "Company MIS"
+        context.dataStore.data.first()[COMPANY_FOOTER] ?: "NODi CBS"
 
     suspend fun getCompanyAddress(): String =
         context.dataStore.data.first()[COMPANY_ADDRESS] ?: ""

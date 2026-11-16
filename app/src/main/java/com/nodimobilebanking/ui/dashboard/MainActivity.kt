@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         val header = binding.root.findViewById<android.widget.TextView>(R.id.tvCompanyHeader)
         header ?: return
         CoroutineScope(Dispatchers.IO).launch {
-            val name = try { tokenManager.getCompanyName() } catch (_: Exception) { "SACCO MIS" }
+            val name = try { tokenManager.getCompanyName() } catch (_: Exception) { "NODi CBS" }
             runOnUiThread { header.text = name.uppercase() }
         }
     }

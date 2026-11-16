@@ -77,7 +77,7 @@ object PdfStatementGenerator {
         context: Context,
         member: MemberProfile,
         statement: FullStatementResponse,
-        companyName: String = "SACCO MIS",
+        companyName: String = "NODi CBS",
         companyAddress: String = "",
         companyContact: String = "",
         companyLocation: String = ""
@@ -146,7 +146,7 @@ object PdfStatementGenerator {
         context: Context,
         member: MemberProfile,
         account: AccountStatement,
-        companyName: String = "SACCO MIS",
+        companyName: String = "NODi CBS",
         companyAddress: String = "",
         companyContact: String = "",
         companyLocation: String = ""
@@ -204,7 +204,7 @@ object PdfStatementGenerator {
         loanTransactions: List<LoanTransaction>,
         savingsBalance: Double,
         loanBalance: Double,
-        companyName: String = "SACCO MIS",
+        companyName: String = "NODi CBS",
         companyAddress: String = "",
         companyContact: String = "",
         companyLocation: String = ""
