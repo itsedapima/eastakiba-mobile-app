@@ -95,12 +95,7 @@
                 android:textStyle="bold"/>
         </LinearLayout>
 
-        <!-- Status text -->
-        <TextView android:id="@+id/tvPaymentStatus"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" android:gravity="center"
-            android:textColor="@color/text_secondary" android:textSize="13sp"
-            android:visibility="gone"/>
+        <!-- Status placeholder (progress shown in floating dialog) -->
 
     </LinearLayout>
 </ScrollView>
