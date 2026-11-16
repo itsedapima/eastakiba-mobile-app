@@ -51,7 +51,12 @@ class SelfRegStep5Fragment : Fragment() {
         binding.tvSummaryPersonal.text = buildString {
             appendLine("Name: ${vm.firstName} ${vm.middleName} ${vm.lastName}".trim())
             appendLine("Gender: ${vm.gender}")
-            appendLine("DOB: ${vm.dob}")
+            val dobDisplay = try {
+                val api = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
+                val df = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.US)
+                df.format(api.parse(vm.dob)!!)
+            } catch (_: Exception) { vm.dob }
+            appendLine("DOB: $dobDisplay")
             appendLine("Category: ${vm.memberType}")
             if (vm.maritalStatus.isNotBlank()) appendLine("Marital Status: ${vm.maritalStatus}")
         }

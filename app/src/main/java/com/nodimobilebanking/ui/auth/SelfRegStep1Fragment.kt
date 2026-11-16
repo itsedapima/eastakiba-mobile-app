@@ -81,7 +81,7 @@ class SelfRegStep1Fragment : Fragment(),
             .setCalendarConstraints(constraints)
             .build()
         picker.addOnPositiveButtonClickListener { millis ->
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
             sdf.timeZone = TimeZone.getTimeZone("UTC")
             binding.etDob.setText(sdf.format(Date(millis)))
         }
@@ -112,7 +112,12 @@ class SelfRegStep1Fragment : Fragment(),
         vm.middleName = binding.etMiddleName.text.toString()
         vm.lastName = binding.etLastName.text.toString()
         vm.gender = if (binding.rbMale.isChecked) "Male" else "Female"
-        vm.dob = binding.etDob.text.toString()
+        val dobDisplay = binding.etDob.text.toString()
+        vm.dob = try {
+            val display = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+            val api = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            api.format(display.parse(dobDisplay)!!)
+        } catch (_: Exception) { dobDisplay }
         val displayName = binding.actvMemberType.text.toString()
         vm.memberType = categoryMap[displayName] ?: displayName
         vm.maritalStatus = binding.actvMaritalStatus.text.toString().ifBlank { "Un-known" }
@@ -124,7 +129,14 @@ class SelfRegStep1Fragment : Fragment(),
         if (vm.lastName.isNotBlank()) binding.etLastName.setText(vm.lastName)
         if (vm.gender == "Male") binding.rbMale.isChecked = true
         else if (vm.gender == "Female") binding.rbFemale.isChecked = true
-        if (vm.dob.isNotBlank()) binding.etDob.setText(vm.dob)
+        if (vm.dob.isNotBlank()) {
+            val display = try {
+                val api = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                val df = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+                df.format(api.parse(vm.dob)!!)
+            } catch (_: Exception) { vm.dob }
+            binding.etDob.setText(display)
+        }
         if (vm.maritalStatus.isNotBlank()) binding.actvMaritalStatus.setText(vm.maritalStatus, false)
     }
 
