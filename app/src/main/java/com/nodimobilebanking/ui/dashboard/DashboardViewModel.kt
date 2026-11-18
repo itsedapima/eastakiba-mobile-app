@@ -60,18 +60,18 @@ class DashboardViewModel(private val repository: SaccoRepository) : ViewModel() 
         viewModelScope.launch { _promotions.value = repository.getPromotions() }
     }
 
-    fun makePayment(memberNo: String, savingType: String, amount: String, desc: String) {
+    fun makePayment(memberNo: String, accountCode: String, amount: String, desc: String) {
         _actionResult.value = Resource.Loading()
         viewModelScope.launch {
-            _actionResult.value = repository.makePayment(memberNo, savingType, amount, desc)
+            _actionResult.value = repository.makePayment(memberNo, accountCode, amount, desc)
         }
     }
 
     /** Unified deposit: savings + loan repayments */
-    fun makeDeposit(memberNo: String, accountType: String, amount: String, desc: String) {
+    fun makeDeposit(memberNo: String, accountCode: String, amount: String, desc: String) {
         _actionResult.value = Resource.Loading()
         viewModelScope.launch {
-            _actionResult.value = repository.makeDeposit(memberNo, accountType, amount, desc)
+            _actionResult.value = repository.makeDeposit(memberNo, accountCode, amount, desc)
         }
     }
 
@@ -96,10 +96,10 @@ class DashboardViewModel(private val repository: SaccoRepository) : ViewModel() 
 
     fun clearLoanResult() { _loanResult.value = null }
 
-    fun stkPush(accountType: String, amount: String, accountReference: String = "") {
+    fun stkPush(accountCode: String, amount: String, accountReference: String = "") {
         _actionResult.value = Resource.Loading()
         viewModelScope.launch {
-            _actionResult.value = repository.stkPush(accountType, amount, accountReference)
+            _actionResult.value = repository.stkPush(accountCode, amount, accountReference)
         }
     }
 
@@ -108,10 +108,10 @@ class DashboardViewModel(private val repository: SaccoRepository) : ViewModel() 
     private val _withdrawalQuote = MutableLiveData<Resource<WithdrawalQuote>?>()
     val withdrawalQuote: LiveData<Resource<WithdrawalQuote>?> = _withdrawalQuote
 
-    fun getWithdrawalQuote(savingType: String, amount: String) {
+    fun getWithdrawalQuote(accountCode: String, amount: String) {
         _withdrawalQuote.value = Resource.Loading()
         viewModelScope.launch {
-            _withdrawalQuote.value = repository.withdrawalQuote(savingType, amount)
+            _withdrawalQuote.value = repository.withdrawalQuote(accountCode, amount)
         }
     }
 
@@ -119,10 +119,10 @@ class DashboardViewModel(private val repository: SaccoRepository) : ViewModel() 
     private val _withdrawalOtp = MutableLiveData<Resource<WithdrawalActionResponse>?>()
     val withdrawalOtp: LiveData<Resource<WithdrawalActionResponse>?> = _withdrawalOtp
 
-    fun initiateWithdrawal(savingType: String, amount: String) {
+    fun initiateWithdrawal(accountCode: String, amount: String) {
         _withdrawalOtp.value = Resource.Loading()
         viewModelScope.launch {
-            _withdrawalOtp.value = repository.makeWithdrawal("", savingType, amount, "Mobile withdrawal")
+            _withdrawalOtp.value = repository.makeWithdrawal("", accountCode, amount, "Mobile withdrawal")
         }
     }
     fun clearWithdrawalOtp() { _withdrawalOtp.value = null }
@@ -131,10 +131,10 @@ class DashboardViewModel(private val repository: SaccoRepository) : ViewModel() 
     private val _withdrawalFinal = MutableLiveData<Resource<WithdrawalActionResponse>?>()
     val withdrawalFinal: LiveData<Resource<WithdrawalActionResponse>?> = _withdrawalFinal
 
-    fun confirmWithdrawalWithOtp(savingType: String, amount: String, otpCode: String) {
+    fun confirmWithdrawalWithOtp(accountCode: String, amount: String, otpCode: String) {
         _withdrawalFinal.value = Resource.Loading()
         viewModelScope.launch {
-            _withdrawalFinal.value = repository.makeWithdrawal("", savingType, amount, "Mobile withdrawal", otpCode)
+            _withdrawalFinal.value = repository.makeWithdrawal("", accountCode, amount, "Mobile withdrawal", otpCode)
         }
     }
     fun clearWithdrawalFinal() { _withdrawalFinal.value = null }

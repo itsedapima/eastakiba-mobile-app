@@ -190,37 +190,37 @@ class SaccoRepository(
     }
 
     // ── Actions ───────────────────────────────────────────────────────────────
-    suspend fun makePayment(memberNo: String, savingType: String, amount: String, desc: String): Resource<String> = safeCall {
-        val r = api.makePayment(PaymentRequest(memberNo, savingType, amount, desc))
+    suspend fun makePayment(memberNo: String, accountCode: String, amount: String, desc: String): Resource<String> = safeCall {
+        val r = api.makePayment(PaymentRequest(memberNo, accountCode, amount, desc))
         if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!.message)
         else Resource.Error(parseError(r.errorBody()?.string()))
     }
 
     suspend fun makeWithdrawal(
         memberNo: String,
-        savingType: String,
+        accountCode: String,
         amount: String,
         desc: String,
         otpCode: String = "",
     ): Resource<WithdrawalActionResponse> = safeCall {
         val deviceId = tokenManager.getDeviceId()
         val r = api.makeWithdrawal(
-            WithdrawRequest(memberNo, savingType, amount, desc, otpCode, deviceId)
+            WithdrawRequest(memberNo, accountCode, amount, desc, otpCode, deviceId)
         )
         if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!)
         else Resource.Error(parseError(r.errorBody()?.string()))
     }
 
     /** Charge preview before confirming a withdrawal */
-    suspend fun withdrawalQuote(savingType: String, amount: String): Resource<WithdrawalQuote> = safeCall {
-        val r = api.withdrawalQuote(mapOf("saving_type" to savingType, "amount" to amount))
+    suspend fun withdrawalQuote(accountCode: String, amount: String): Resource<WithdrawalQuote> = safeCall {
+        val r = api.withdrawalQuote(mapOf("account_code" to accountCode, "amount" to amount))
         if (r.isSuccessful && r.body() != null) Resource.Success(r.body()!!)
         else Resource.Error(parseError(r.errorBody()?.string()))
     }
 
     /** Unified deposit — handles both savings deposits and loan repayments */
-    suspend fun makeDeposit(memberNo: String, accountType: String, amount: String, desc: String): Resource<String> = safeCall {
-        val r = api.makeDeposit(DepositRequest(memberNo, accountType, amount, desc))
+    suspend fun makeDeposit(memberNo: String, accountCode: String, amount: String, desc: String): Resource<String> = safeCall {
+        val r = api.makeDeposit(DepositRequest(memberNo, accountCode, amount, desc))
         if (r.isSuccessful && r.body() != null) Resource.Success("${r.body()!!.type}: ${r.body()!!.message}")
         else Resource.Error(parseError(r.errorBody()?.string()))
     }
@@ -256,9 +256,9 @@ class SaccoRepository(
         else Resource.Error(parseError(r.errorBody()?.string()))
     }
 
-    suspend fun stkPush(accountType: String, amount: String, accountReference: String = ""): Resource<String> = safeCall {
+    suspend fun stkPush(accountCode: String, amount: String, accountReference: String = ""): Resource<String> = safeCall {
         val r = api.stkPush(mapOf(
-            "account_type" to accountType,
+            "account_code" to accountCode,
             "amount" to amount,
             "account_reference" to accountReference
         ))

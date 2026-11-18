@@ -69,6 +69,7 @@ data class MemberAccount(
     val id: String,
     val text: String? = "",
     @SerializedName("account_code") val accountCode: String? = "",
+    @SerializedName("account_type") val accountType: String? = "",
     @SerializedName("acc_initials") val accInitials: String? = "",
     @SerializedName("account_name") val accountName: String? = "",
     @SerializedName("sub_text") val subText: String? = "",
@@ -202,18 +203,18 @@ data class BalanceSummary(
 
 // ─── Actions ──────────────────────────────────────────────────────────────────
 data class PaymentRequest(
-    @SerializedName("member_no")   val memberNo: String,
-    @SerializedName("saving_type") val savingType: String,
+    @SerializedName("member_no")     val memberNo: String,
+    @SerializedName("account_code")  val accountCode: String,
     val amount: String,
     val description: String
 )
 data class WithdrawRequest(
-    @SerializedName("member_no")   val memberNo: String,
-    @SerializedName("saving_type") val savingType: String,
+    @SerializedName("member_no")     val memberNo: String,
+    @SerializedName("account_code")  val accountCode: String,
     val amount: String,
     val description: String,
-    @SerializedName("otp_code")    val otpCode: String = "",
-    @SerializedName("device_id")   val deviceId: String = ""
+    @SerializedName("otp_code")      val otpCode: String = "",
+    @SerializedName("device_id")     val deviceId: String = ""
 )
 
 // Withdrawal: response covers BOTH the "OTP sent" step and the final disbursement.
@@ -232,8 +233,8 @@ data class WithdrawalActionResponse(
 
 // Unified deposit — works for both savings and loan repayment
 data class DepositRequest(
-    @SerializedName("member_no")    val memberNo: String,
-    @SerializedName("account_type") val accountType: String,
+    @SerializedName("member_no")     val memberNo: String,
+    @SerializedName("account_code")  val accountCode: String,
     val amount: String,
     val description: String
 )
